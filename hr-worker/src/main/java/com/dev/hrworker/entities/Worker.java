@@ -1,0 +1,65 @@
+package com.dev.hrworker.entities;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.io.Serializable;
+import java.util.Objects;
+import javax.persistence.GenerationType;
+
+@Entity
+@Table(name = "tb_worker")
+public class Worker implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long Id;
+    private String name;
+    private Double dailyIncome;
+
+    public Worker() {
+    }
+
+    public Worker(Long Id, String name, Double dailyIncome) {
+        this.Id = Id;
+        this.name = name;
+        this.dailyIncome = dailyIncome;
+    }
+
+    public Long getId() {
+        return Id;
+    }
+
+    public void setId(Long id) {
+        Id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getDailyIncome() {
+        return dailyIncome;
+    }
+
+    public void setDailyIncome(Double dailyIncome) {
+        this.dailyIncome = dailyIncome;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Worker worker = (Worker) o;
+        return Objects.equals(Id, worker.Id) && Objects.equals(name, worker.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(Id, name);
+    }
+}
