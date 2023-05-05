@@ -1,7 +1,7 @@
 package com.dev.hrworker.resources;
 
 import com.dev.hrworker.entities.Worker;
-import com.dev.hrworker.repositories.WorkerRepository;
+import com.dev.hrworker.services.WorkerService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -27,7 +27,7 @@ public class WorkerResourceTests {
     private WorkerResource workerResource;
 
     @Mock
-    private WorkerRepository workerRepository;
+    private WorkerService workerService;
 
     @Mock
     private Worker Worker;
@@ -38,9 +38,9 @@ public class WorkerResourceTests {
     }
 
     @Test
-    public void findAllShouldReturnAllWorkers() {
+    public void findAllShouldReturnAllWorkersAndStatus200() {
         List<Worker> list = List.of(new Worker(ID, NAME, DAILY_INCOME));
-        when(workerRepository.findAll()).thenReturn(list);
+        when(workerService.findAll()).thenReturn(list);
 
         ResponseEntity<List<Worker>> response = workerResource.findAll();
 
@@ -50,10 +50,8 @@ public class WorkerResourceTests {
     }
 
     @Test
-    public void findByIdShouldReturnWorkerWhenIdExists() {
-        Optional<Worker> optionalWorker = Optional.of(new Worker(ID, NAME, DAILY_INCOME));
-        when(workerRepository.findById(Mockito.anyLong())).thenReturn(optionalWorker);
-
+    public void findByIdShouldReturnWorkerWhenIdExistsAndStatus200() {
+        when(workerService.findById(Mockito.anyLong())).thenReturn(new Worker(ID, NAME, DAILY_INCOME));
         ResponseEntity<Optional<Worker>> response = workerResource.findById(ID);
 
         Assertions.assertNotNull(response);
