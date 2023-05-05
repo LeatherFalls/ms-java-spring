@@ -1,9 +1,7 @@
 package com.dev.hrworker.resources;
 
 import com.dev.hrworker.entities.Worker;
-import com.dev.hrworker.repositories.WorkerRepository;
 import com.dev.hrworker.services.WorkerService;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
