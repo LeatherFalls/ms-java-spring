@@ -3,7 +3,6 @@ package com.dev.hrpayroll.entities;
 import java.io.Serializable;
 
 public class Payment implements Serializable {
-
         private String name;
         private Double dailyIncome;
         private Integer days;
