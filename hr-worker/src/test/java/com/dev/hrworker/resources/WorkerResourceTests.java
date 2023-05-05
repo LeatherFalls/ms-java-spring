@@ -45,7 +45,6 @@ public class WorkerResourceTests {
         ResponseEntity<List<Worker>> response = workerResource.findAll();
 
         Assertions.assertNotNull(response);
-        System.out.println(response.getBody().get(0).getName());
         Assertions.assertEquals(200, response.getStatusCodeValue());
         Assertions.assertEquals(1, response.getBody().size());
     }

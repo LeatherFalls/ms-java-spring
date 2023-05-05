@@ -2,6 +2,7 @@ package com.dev.hrworker.resources;
 
 import com.dev.hrworker.entities.Worker;
 import com.dev.hrworker.repositories.WorkerRepository;
+import com.dev.hrworker.services.WorkerService;
 import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,20 +18,17 @@ import java.util.Optional;
 @RequestMapping(value = "/workers")
 public class WorkerResource {
     @Autowired
-    private WorkerRepository workerRepository;
+    private WorkerService workerService;
 
     @GetMapping
     public ResponseEntity<List<Worker>> findAll() {
-        List<Worker> list = workerRepository.findAll();
+        List<Worker> list = workerService.findAll();
         return ResponseEntity.ok(list);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Optional<Worker>> findById(@PathVariable Long id) {
-        Optional<Worker> obj = workerRepository.findById(id);
-        if (obj.isEmpty()) {
-            throw new ObjectNotFoundException(id, "Worker not found");
-        }
+        Optional<Worker> obj = Optional.ofNullable(workerService.findById(id));
         return ResponseEntity.ok(obj);
     }
 }
